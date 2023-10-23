@@ -6,7 +6,7 @@ import json
 
 class classifier:
     model = tf.keras.applications.vgg16.VGG16(weights='imagenet')
-    
+
     def classify_image(self, image_path):
         response = {}
         X = tf.keras.preprocessing.image.load_img(image_path, target_size=(224,224))
@@ -26,5 +26,4 @@ class classifier:
         classification = {'image_path': image_path, 
                         'label': result[0][0][1],
                         'confidence': result[0][0][2]}
-        
         return classification
