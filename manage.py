@@ -1,6 +1,7 @@
 # server.py: flask framework for running web-crawler app
 
 from flask import Flask
+from flask import jsonify, requests
 from .crawler import crawler
 from .classifier import classifier
 
