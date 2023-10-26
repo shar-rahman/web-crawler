@@ -36,11 +36,7 @@ class crawler:
             src = img.get_attribute('src')
             image_path = "media/" + keyword + "_{}".format(idx)+".png"
             imagepath_list.append(image_path)
-            try: 
-                urllib.request.urlretrieve(str(src), image_path)
-            except Exception e:
-                print e
-                continue
+            urllib.request.urlretrieve(str(src), image_path)
 
         
         return imagepath_list
