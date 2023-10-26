@@ -37,6 +37,7 @@ class crawler:
             return "Page not found - Try different keyword."
         scraped_results = self.driver.find_elements(By.XPATH, "//img[contains(@class, 'x5yr21d xu96u03 x10l6tqk x13vifvy x87ps6o xh8yej3')]")
         
+        # download images to file path and return list of paths downloaded
         imagepath_list = []
         for idx, image in enumerate(scraped_results):
             if len(imagepath_list) == 5: #ensures 5 downloads
