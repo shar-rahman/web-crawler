@@ -6,6 +6,8 @@ from crawler import crawler
 from classifier import classifier
 import json
 import pandas as pd
+import os
+import imghdr
 
 app = Flask(__name__)
 classifier = classifier()
@@ -29,6 +31,9 @@ def crawl():
     if result == {}:
         return "Error: Keyword produced no results"
     
+    if type(result) == str:
+        return "Error: Try different keyword."
+    
     # list of outputs from model classification
     classifications = []
     for path in result:
@@ -49,6 +54,13 @@ def crawl():
 @app.route('/classify')
 def classify():
     path = request.args['path']
+
+    # check user input:
+    if not os.path.isfile(path) == True:
+        return "File path does not exist"
+    elif imghdr.what(path) == None:
+        return "File path is not an image"
+    
     y = classifier.classify_image(path)
     return json.dumps(str(y))
 
