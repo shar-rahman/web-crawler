@@ -53,4 +53,4 @@ def classify():
     return json.dumps(str(y))
 
 if __name__ == '__main__':
-    app.run(port=8881)
+    app.run(port=8881) # can remove port=8881 to default to 5000. was having issues on personal pc with port 5000
