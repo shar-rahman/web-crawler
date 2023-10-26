@@ -9,7 +9,7 @@ import pandas as pd
 
 app = Flask(__name__)
 classifier = classifier()
-crawl = crawler()
+
 
 # api endpoints
 # 1. ("/crawler"): use crawler with search function: ?search=XXX
@@ -22,17 +22,21 @@ crawl = crawler()
 # example usage: 127.0.0.1:5000/crawler?search=test will download 5 images and return json classification
 @app.route('/crawler')
 def crawl():
-    # init crawler
+    spider = crawler()
     keyword = request.args['search']
-    result = crawl.search_by_keyword(keyword)
+    result = spider.search_by_keyword(keyword)
+
     if result == {}:
         return "Error: Keyword produced no results"
     
+    # list of outputs from model classification
     classifications = []
-    for i in result:
-        y = classifier.classify_image(i)
+    for path in result:
+        y = classifier.classify_image(path)
         classifications.append(y)
 
+    # convert list of dicts to pandas dataframe is very easy to convert into json representation
+    # purposefully naive
     df = pd.DataFrame(classifications)
     
     return df.to_json()
@@ -41,7 +45,7 @@ def crawl():
 # input: path to image
 # output: classification in form of: image_path, label, confidence
 #
-# example usage: 127.0.0.1:5000/classify?path=media/test_0.png will return classification
+# example usage: 127.0.0.1:8881/classify?path=media/test_0.png will return classification
 @app.route('/classify')
 def classify():
     path = request.args['path']
@@ -49,4 +53,4 @@ def classify():
     return json.dumps(str(y))
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=False, port=8881)
+    app.run(port=8881)
