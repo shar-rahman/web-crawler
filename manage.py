@@ -61,6 +61,7 @@ def classify():
     elif imghdr.what(path) == None:
         return "File path is not an image"
     
+    
     y = classifier.classify_image(path)
     return json.dumps(str(y))
 
