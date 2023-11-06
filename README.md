@@ -14,6 +14,7 @@ A simple Instagram web crawler that will download images for a desired keyword a
     selenium==4.14.0
     tensorflow==2.14.0
 
+
 ## Usage
 
 Download all requirements as shown above in requirements.txt
