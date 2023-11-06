@@ -35,6 +35,8 @@ The API endpoints are as follows:
         curl 127.0.0.1:8881/crawler?search=XX where XX is your keyword to be searched.
         curl 127.0.0.1:8881/classify?path=XX where XX is the path to image to be classified.
 
+Alternatively, you can browse to 127.0.0.1:8881/crawler?search=XX or 127.0.0.1:8881/classify?path=XX to access the API.
+
 Images will be downloaded to media/
 
 
